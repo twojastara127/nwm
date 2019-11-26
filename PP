@@ -1,0 +1,174 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <conio.h>
+#include <unistd.h>
+#include <string.h>
+#include <time.h>
+
+
+void zgadywanka()
+{
+	char haslo[8]={'h','a','s','l','o','1','2','3'};
+	char tab1[8]={'_','_','_','_','_','_','_','_'};
+	char znak;
+	int wynik;
+	int k=0;
+	int i, j;
+
+	do
+	{
+	    scanf("%c", &znak);
+	    for(int i=0; i<8; i++)
+
+	        if(znak==haslo[i])
+	        tab1[i]=haslo[i];
+	        wynik=0;
+	        
+	        for(int id=0; id<8; ++id)
+	        {
+	            if(haslo[id]==tab1[id])
+	            ++wynik;
+	        }
+	        if(wynik==8)
+	        {
+	            printf("Gz, wygrales\n\n");
+	            system("pause");
+	            exit(0);
+	        }
+	        for(int j=0; j<8; j++)
+			
+	            printf("%c",tab1[j]);
+	            printf("\n");
+	            i=0;
+	            j=0;
+	       
+	k++;
+	}while(k<=11);
+
+    system("pause");
+	/*do{
+		printf("Podaj znak hasla:");
+		scanf(" %c", &znak);
+		for(int k=0; k<8; k++)
+		{
+			if(znak==haslo[i])
+				{
+				tab1[i]=haslo[i];
+				pomoc=true;
+				}
+			else goto blednaodp;		
+		}
+		
+	blednaodp:{
+	if (!pomoc)
+		{
+		proba--;
+		printf("Proba nieudana, ilosc prob=%d\n", proba);
+		pomoc=false;
+		break;
+		}}
+		if(proba==0)
+		break;
+
+	i++;
+	}while(i<8);*/
+
+}
+
+
+void szyfr()
+{
+    int klucz;
+    printf("Podaj klucz szyfru: ");
+    scanf("%d", &klucz);
+    if(klucz>26)
+        klucz-=26;
+    else if(klucz<0)
+        klucz+=26;
+    char przed[11];
+    printf("Podaj kod 10 wielkich liter: ");
+    for(int i=0; i<11; i++)
+    {
+        scanf("%c", &przed[i]);
+    }
+    for(int i=0; i<11; i++)
+    {
+        if(przed[i]==' ')
+            continue;
+        	przed[i]+=klucz;
+        if(przed[i]>'Z')
+            przed[i]-=26;
+    }
+    
+    printf("Zaszyfrowany kod:\n ");
+    for(int i=0; i<11; i++)
+    {
+        printf("%c", przed[i]);
+    }
+    printf("\n");
+    system("pause");
+    
+    
+}
+
+void losowehaslo()
+{
+	int n;
+	n=(rand()%16)+10;
+	char *haslo=new char[n+1];
+	
+	
+	for(int i=0; i<n; i++)
+	{
+		haslo[i]=rand()%('z'-'0'+1)+'0';
+	}
+	
+	
+	for(int i=0; i<n; i++)
+	{
+		printf("%c", haslo[i]);
+	}
+	delete [] haslo;
+	printf("\n");
+	system("pause");
+	
+}
+
+
+void clrscr()
+{
+    system("@cls||clear");
+}
+
+int main()
+{
+	srand(time(NULL));
+	char wybor;
+	for(;;){
+	printf("1. Zgadywanie hasla.\n2. Szyfr Cezara\n3. Losowe haslo\n4. Zakoncz\n");
+	printf("Wybierz co chcesz zrobic: ");
+    wybor=getchar();
+	switch(wybor)
+	{
+	case '1':
+	zgadywanka();
+	break;
+	case '2':
+	szyfr();
+	break;
+	case '3':
+	losowehaslo();
+	break;
+	case '4': exit(0);
+	break;
+	default: 
+	break;	
+	}
+	getchar();
+	//system("cls"); ???
+	clrscr();
+	}
+return 0;
+}
+
